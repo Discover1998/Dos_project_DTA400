@@ -1,6 +1,4 @@
-import simpy
-import random
-import pygame
+import simpy, random, pygame
 import matplotlib.pyplot as plt
 
 # Simulation Parameters
@@ -73,7 +71,7 @@ class ThreatActor:
         pygame.draw.polygon(screen, BLACK, [(self.x - 30, self.y + 40), (self.x + 30, self.y + 40), (self.x + 20, self.y + 80), (self.x - 20, self.y + 80)], 3)
         pygame.draw.rect(screen, BLACK, (self.x - 5, self.y + 40, 10, 20))
         pygame.draw.polygon(screen, BLACK, [(self.x - 10, self.y + 60), (self.x + 10, self.y + 60), (self.x, self.y + 80)])
-        screen.blit(font.render('Hacker', True, BLACK), (self.x - 30, self.y + 85))
+        screen.blit(font.render('Hacker', True, BLACK), (self.x - 40, self.y + 85))
 
 def draw_server_icon(screen, rect, color):
     pygame.draw.ellipse(screen, color, pygame.Rect(rect.x, rect.y, rect.width, rect.height // 4))
@@ -136,7 +134,7 @@ def pygame_visualization(server, env):
         draw_server_icon(screen, server_sprite, server_color)
 
         server_status_text = server_status_font.render("Under Attack" if attack_started else "Normal Status", True, GRAY if attack_started else GREEN)
-        screen.blit(server_status_text, (SCREEN_WIDTH // 2 - 75, SCREEN_HEIGHT // 2 + 100))
+        screen.blit(server_status_text, (SCREEN_WIDTH // 2 - 90, SCREEN_HEIGHT // 2 + 100))
 
         pygame.display.flip()
         clock.tick(FPS)
@@ -158,9 +156,9 @@ if cpu_load_over_time:
     plt.figure(figsize=(10, 5))
     plt.plot(times, cpu_loads, label='CPU Load (%)')
     plt.axvline(x=DOS_ATTACK_START, color='red', linestyle='--', label='DoS Attack Start')
-    plt.xlabel('Time (s)', fontname='Times New Roman', fontsize=17)
-    plt.ylabel('CPU Load (%)', fontname='Times New Roman', fontsize=17)
-    plt.title('Server CPU Load Over Time', fontname='Times New Roman', fontsize=19)
+    plt.xlabel('Time (s)', fontname='Times New Roman', fontsize=20)
+    plt.ylabel('CPU Load (%)', fontname='Times New Roman', fontsize=20)
+    plt.title('Server CPU Load Over Time', fontname='Times New Roman', fontsize=22)
     plt.legend(prop={'size': 14})
     plt.grid(True)
     plt.show()
@@ -170,9 +168,9 @@ if dropped_packets_over_time:
     plt.figure(figsize=(10, 5))
     plt.plot(times, dropped_packets, label='Dropped Packets')
     plt.axvline(x=DOS_ATTACK_START, color='red', linestyle='--', label='DoS Attack Start')
-    plt.xlabel('Time (s)', fontname='Times New Roman', fontsize=17)
-    plt.ylabel('Dropped Packets', fontname='Times New Roman', fontsize=17)
-    plt.title('Dropped Packets Over Time', fontname='Times New Roman', fontsize=19)
+    plt.xlabel('Time (s)', fontname='Times New Roman', fontsize=20)
+    plt.ylabel('Dropped Packets', fontname='Times New Roman', fontsize=20)
+    plt.title('Dropped Packets Over Time', fontname='Times New Roman', fontsize=22)
     plt.legend(prop={'size': 14})
     plt.grid(True)
     plt.show()
