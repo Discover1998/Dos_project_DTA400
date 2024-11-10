@@ -133,7 +133,7 @@ def pygame_visualization(server, env):
         server_color = GRAY if cpu_load >= 80 else GREEN
         draw_server_icon(screen, server_sprite, server_color)
 
-        server_status_text = server_status_font.render("Under Attack" if attack_started else "Normal Status", True, GRAY if attack_started else GREEN)
+        server_status_text = server_status_font.render("Under Attack" if attack_started else "Normal Status", True, BLACK if attack_started else BLACK)
         screen.blit(server_status_text, (SCREEN_WIDTH // 2 - 90, SCREEN_HEIGHT // 2 + 100))
 
         pygame.display.flip()
