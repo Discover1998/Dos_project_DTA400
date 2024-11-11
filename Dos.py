@@ -30,7 +30,8 @@ class Server:
         with self.queue.request() as req:
             if len(self.queue.users) >= self.capacity:
                 self.dropped_packets += 1
-                sprite.icon_type = 'dropped'
+                if request_type == 'normal':  # Only mark 'normal' requests as dropped
+                    sprite.icon_type = 'dropped'
                 return
             yield req
             yield self.env.timeout(REQUEST_PROCESSING_TIME)
@@ -133,7 +134,7 @@ def pygame_visualization(server, env):
         server_color = GRAY if cpu_load >= 80 else GREEN
         draw_server_icon(screen, server_sprite, server_color)
 
-        server_status_text = server_status_font.render("Under Attack" if attack_started else "Normal Status", True, BLACK if attack_started else BLACK)
+        server_status_text = server_status_font.render("Under Attack" if attack_started else "Normal Status", True, BLACK)
         screen.blit(server_status_text, (SCREEN_WIDTH // 2 - 90, SCREEN_HEIGHT // 2 + 100))
 
         pygame.display.flip()
