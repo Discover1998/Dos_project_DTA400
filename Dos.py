@@ -30,7 +30,7 @@ class Server:
         with self.queue.request() as req:
             if len(self.queue.users) >= self.capacity:
                 self.dropped_packets += 1
-                if request_type == 'normal':  # Only mark 'normal' requests as dropped
+                if request_type == 'normal':
                     sprite.icon_type = 'dropped'
                 return
             yield req
@@ -56,7 +56,8 @@ class ClientSprite(pygame.sprite.Sprite):
         if self.icon_type == 'user':
             pygame.draw.circle(screen, BLUE, self.rect.center, 12)
         elif self.icon_type == 'attacker':
-            pygame.draw.rect(screen, YELLOW, self.rect)
+            pygame.draw.rect(screen, YELLOW, self.rect) 
+            pygame.draw.rect(screen, BLACK, self.rect, 1)
         elif self.icon_type == 'dropped':
             pygame.draw.line(screen, RED, self.rect.topleft, self.rect.bottomright, 5)
             pygame.draw.line(screen, RED, self.rect.topright, self.rect.bottomleft, 5)
